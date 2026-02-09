@@ -5,7 +5,7 @@
 
 An optimal solver for [Wordle](https://en.wikipedia.org/wiki/Wordle) and its variants, leveraging **information theory** and **Shannon entropy** to maximize information gain at each step. This implementation supports French word dictionaries with 5-9 letter words and employs sophisticated heuristics to maintain computational tractability for longer words.
 
-## 🎓 Theoretical Foundation
+## Theoretical Foundation
 
 ### The Wordle Problem
 

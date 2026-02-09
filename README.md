@@ -259,9 +259,6 @@ Legacy interface for quick testing:
 # Interactive solver
 python Wordle.py
 
-# Play locally against computer
-python motus.py
-
 # Sutom variant (first letter revealed)
 python Sutom.py
 ```

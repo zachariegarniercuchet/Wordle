@@ -1,0 +1,6 @@
+# Python standard library (no external dependencies required for basic usage)
+# Optional dependencies for Jupyter notebook features:
+jupyter>=1.0.0
+notebook>=6.0.0
+matplotlib>=3.3.0
+numpy>=1.19.0

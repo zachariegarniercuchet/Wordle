@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Motus Solver - Zero Install</title>
+  <title>Wordle Solver - Zero Install</title>
   <style>
     :root {
       --bg-1: #f8f4ec;
@@ -217,7 +217,7 @@
 
     .tiles {
       display: grid;
-      grid-template-columns: repeat(var(--word-len), minmax(44px, 1fr));
+      grid-template-columns: repeat(var(--word-len), minmax(0, 1fr));
       gap: 8px;
       margin-top: 10px;
     }
@@ -229,7 +229,7 @@
       display: grid;
       place-items: center;
       font-weight: 700;
-      font-size: 1.35rem;
+      font-size: clamp(0.9rem, 2vw, 1.35rem);
       letter-spacing: 0.02em;
       user-select: none;
       cursor: pointer;
@@ -352,7 +352,7 @@
 <body>
   <main class="app">
     <header class="header">
-      <h1 id="pageTitle" class="title">Motus Solver Web</h1>
+      <h1 id="pageTitle" class="title">Wordle Solver Web</h1>
     </header>
 
     <section class="grid">
@@ -428,7 +428,7 @@
         htmlLang: "fr",
         prefix: "french",
         languageLabel: "Langue",
-        title: "Motus Solver Web",
+        title: "Wordle Solver Web",
         settingsTitle: "Paramètres de partie",
         enterTry: "Entrer un essai",
         lengthLabel: "Longueur",
@@ -459,7 +459,7 @@
         htmlLang: "en",
         prefix: "english",
         languageLabel: "Language",
-        title: "Motus Solver Web",
+        title: "Wordle Solver Web",
         settingsTitle: "Game settings",
         enterTry: "Enter a guess",
         lengthLabel: "Length",

@@ -1,0 +1,48 @@
+{
+  "top_word": "serian",
+  "top_words": [
+    {
+      "word": "serian",
+      "bits": 25.420266874432652
+    },
+    {
+      "word": "saline",
+      "bits": 25.144886258528697
+    },
+    {
+      "word": "serial",
+      "bits": 24.678789740572284
+    },
+    {
+      "word": "alines",
+      "bits": 24.42749511592294
+    },
+    {
+      "word": "silane",
+      "bits": 24.42631013362238
+    },
+    {
+      "word": "lineas",
+      "bits": 24.39929303106974
+    },
+    {
+      "word": "selina",
+      "bits": 24.286274338976913
+    },
+    {
+      "word": "rosine",
+      "bits": 24.106110183839366
+    },
+    {
+      "word": "lianes",
+      "bits": 24.086650706795524
+    },
+    {
+      "word": "selion",
+      "bits": 24.060190610274308
+    }
+  ],
+  "top_word_bits": 25.420266874432652,
+  "expected_information": 25.420266874432652,
+  "word_count": 29874
+}

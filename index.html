@@ -446,8 +446,11 @@
         noCandidates: "0 mot possible: vérifie ton feedback (couleurs).",
         solved: (word) => "Trouvé: " + word + " !",
         filtered: "Filtrage terminé. Prochaines suggestions calculées.",
+        calculating: (done, total) => "Calcul en cours: " + done + "/" + total + "...",
         resetDone: "Partie réinitialisée.",
         ready: "Prêt. Entre un mot puis clique les cases pour le feedback.",
+        possibleTag: "possible",
+        exploratoryTag: "info",
         errorLoad: (details) =>
           "Erreur de chargement. Publie ce dossier sur GitHub Pages ou utilise un serveur local HTTP. Détails: " + details,
         suggestionNone: "Aucune suggestion."
@@ -474,8 +477,11 @@
         noCandidates: "0 possible words: check your feedback (colors).",
         solved: (word) => "Found: " + word + " !",
         filtered: "Filtering complete. Next suggestions calculated.",
+        calculating: (done, total) => "Computing: " + done + "/" + total + "...",
         resetDone: "Game reset.",
         ready: "Ready. Enter a word and click the tiles for feedback.",
+        possibleTag: "possible",
+        exploratoryTag: "explore",
         errorLoad: (details) =>
           "Loading error. Publish this folder on GitHub Pages or use a local HTTP server. Details: " + details,
         suggestionNone: "No suggestions."
@@ -652,7 +658,7 @@
         return;
       }
 
-      const suggestions = await topEntropySuggestions(appState.candidates, 8);
+      const suggestions = await topEntropySuggestions(appState.candidates, appState.dictionary, 8);
       renderResults(suggestions);
     }
 
@@ -685,7 +691,7 @@
         return;
       }
 
-      for (const { word, score } of suggestions) {
+      for (const { word, score, isPossible } of suggestions) {
         const line = document.createElement("button");
         line.className = "result";
         line.type = "button";
@@ -694,10 +700,21 @@
         line.style.cursor = "pointer";
         const left = document.createElement("strong");
         left.textContent = word;
+        const tag = document.createElement("span");
+        tag.className = "mono";
+        tag.style.fontSize = "0.78rem";
+        tag.style.marginLeft = "8px";
+        tag.style.opacity = "0.78";
+        tag.textContent = isPossible ? getText().possibleTag : getText().exploratoryTag;
+        const leftWrap = document.createElement("span");
+        leftWrap.style.display = "inline-flex";
+        leftWrap.style.alignItems = "center";
+        leftWrap.appendChild(left);
+        leftWrap.appendChild(tag);
         const right = document.createElement("span");
         right.className = "mono";
         right.textContent = score.toFixed(3) + " bits";
-        line.appendChild(left);
+        line.appendChild(leftWrap);
         line.appendChild(right);
         line.addEventListener("click", () => {
           els.guessInput.value = word;
@@ -743,6 +760,7 @@
 
       const cache = await loadTopExamples();
       const entry = cache[appState.dictionaryKey];
+      const candidateSet = new Set(appState.candidates);
 
       if (!entry || !entry.top_word) {
         renderResults([]);
@@ -752,12 +770,14 @@
       const suggestions = Array.isArray(entry.top_words)
         ? entry.top_words.slice(0, 8).map((item) => ({
             word: item.word,
-            score: typeof item.bits === "number" ? item.bits : 0
+            score: typeof item.bits === "number" ? item.bits : 0,
+            isPossible: candidateSet.has(item.word)
           }))
         : [
             {
               word: entry.top_word,
-              score: typeof entry.top_word_bits === "number" ? entry.top_word_bits : 0
+              score: typeof entry.top_word_bits === "number" ? entry.top_word_bits : 0,
+              isPossible: candidateSet.has(entry.top_word)
             }
           ];
 
@@ -797,14 +817,15 @@
       return currentCandidates.filter((answer) => patternToKey(feedbackFor(attempt.word, answer)) === targetKey);
     }
 
-    function buildGuessPool(candidates) {
-      if (candidates.length <= 450) {
-        return candidates;
+    function buildGuessPool(guessWords, candidates) {
+      if (guessWords.length <= 550) {
+        return guessWords;
       }
 
       const len = appState.wordLength;
       const posFreq = Array.from({ length: len }, () => Object.create(null));
       const globalFreq = Object.create(null);
+      const candidateSet = new Set(candidates);
 
       for (const w of candidates) {
         for (let i = 0; i < len; i += 1) {
@@ -814,7 +835,7 @@
         }
       }
 
-      const scored = candidates.map((w) => {
+      const scored = guessWords.map((w) => {
         let s = 0;
         const seen = new Set();
         for (let i = 0; i < len; i += 1) {
@@ -825,26 +846,30 @@
             s += globalFreq[c] || 0;
           }
         }
+        if (candidateSet.has(w)) {
+          s += 12;
+        }
         return { word: w, score: s };
       });
 
       scored.sort((a, b) => b.score - a.score);
-      const limit = Math.min(candidates.length, candidates.length > 2500 ? 230 : 320);
+      const limit = Math.min(guessWords.length, guessWords.length > 9000 ? 500 : 720);
       return scored.slice(0, limit).map((x) => x.word);
     }
 
-    async function topEntropySuggestions(candidates, limit = 8) {
+    async function topEntropySuggestions(candidates, guessWords, limit = 8) {
       if (!candidates.length) {
         return [];
       }
 
-      const guessPool = buildGuessPool(candidates);
+      const guessPool = buildGuessPool(guessWords, candidates);
       const total = candidates.length;
+      const candidateSet = new Set(candidates);
       const out = [];
 
       for (let i = 0; i < guessPool.length; i += 1) {
         if (i % 20 === 0) {
-          setStatus("Calcul en cours: " + i + "/" + guessPool.length + "...", "");
+          setStatus(getText().calculating(i, guessPool.length), "");
           await new Promise((resolve) => requestAnimationFrame(resolve));
         }
 
@@ -862,7 +887,7 @@
           entropy -= p * log2(p);
         }
 
-        out.push({ word: guess, score: entropy });
+        out.push({ word: guess, score: entropy, isPossible: candidateSet.has(guess) });
       }
 
       out.sort((a, b) => b.score - a.score);

@@ -1,6 +1,6 @@
 # Word Lists
 
-This directory contains French word dictionaries used by the Wordle solver.
+This directory contains French and English word dictionaries used by the Wordle solver.
 
 ## Files
 
@@ -9,10 +9,16 @@ This directory contains French word dictionaries used by the Wordle solver.
 - `french_7.txt` - 7-letter French words
 - `french_8.txt` - 8-letter French words
 - `french_9.txt` - 9-letter French words
+- `english_5.txt` - 5-letter English words
+- `english_6.txt` - 6-letter English words
+- `english_7.txt` - 7-letter English words
+- `english_8.txt` - 8-letter English words
+- `english_9.txt` - 9-letter English words
 
 ## Source
 
-These word lists are derived from French language databases and have been filtered for common usage.
+The French word lists are derived from French language databases and have been filtered for common usage.
+The English lists are generated from `words_alpha.txt` using `help.py`.
 
 ## Format
 

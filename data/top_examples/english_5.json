@@ -1,0 +1,48 @@
+{
+  "top_word": "reals",
+  "top_words": [
+    {
+      "word": "reals",
+      "bits": 7.720527021004296
+    },
+    {
+      "word": "lears",
+      "bits": 7.719408978005027
+    },
+    {
+      "word": "aloes",
+      "bits": 7.710972099256003
+    },
+    {
+      "word": "lares",
+      "bits": 7.702554541891679
+    },
+    {
+      "word": "arise",
+      "bits": 7.685594225858345
+    },
+    {
+      "word": "sorel",
+      "bits": 7.674322672130577
+    },
+    {
+      "word": "roles",
+      "bits": 7.673512729721157
+    },
+    {
+      "word": "lores",
+      "bits": 7.618729448808801
+    },
+    {
+      "word": "aries",
+      "bits": 7.551979553347774
+    },
+    {
+      "word": "seral",
+      "bits": 7.519797663927329
+    }
+  ],
+  "top_word_bits": 7.720527021004296,
+  "expected_information": 7.720527021004296,
+  "word_count": 15921
+}

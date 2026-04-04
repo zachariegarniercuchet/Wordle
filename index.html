@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Motus Solver - Zero Install</title>
+  <style>
+    :root {
+      --bg-1: #f8f4ec;
+      --bg-2: #e8edf6;
+      --ink: #1e2230;
+      --muted: #51576b;
+      --card: rgba(255, 255, 255, 0.78);
+      --line: rgba(30, 34, 48, 0.16);
+      --accent: #146356;
+      --accent-2: #f08a24;
+      --bad: #8e97a9;
+      --shadow: 0 14px 38px rgba(23, 30, 48, 0.18);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--ink);
+      font-family: "Bahnschrift", "Trebuchet MS", "Gill Sans", sans-serif;
+      background:
+        radial-gradient(circle at 8% 10%, #f7d8a9 0%, transparent 38%),
+        radial-gradient(circle at 92% 82%, #c8e1f4 0%, transparent 44%),
+        linear-gradient(130deg, var(--bg-1), var(--bg-2));
+      display: flex;
+      justify-content: center;
+      padding: 24px 16px 40px;
+    }
+
+    .app {
+      width: min(980px, 100%);
+      background: var(--card);
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      animation: rise 0.45s ease-out;
+    }
+
+    @keyframes rise {
+      from {
+        transform: translateY(10px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .header {
+      padding: 24px;
+      border-bottom: 1px solid var(--line);
+      background: linear-gradient(90deg, rgba(20, 99, 86, 0.09), rgba(240, 138, 36, 0.08));
+    }
+
+    .title {
+      margin: 0;
+      font-size: clamp(1.5rem, 4vw, 2.2rem);
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+
+    .subtitle {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 0.98rem;
+    }
+
+    .grid {
+      display: grid;
+      gap: 18px;
+      padding: 22px;
+      grid-template-columns: 1.1fr 0.9fr;
+    }
+
+    @media (max-width: 900px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.7);
+      padding: 18px;
+    }
+
+    .panel h2 {
+      margin: 0 0 12px;
+      font-size: 1.08rem;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+
+    .stack {
+      display: grid;
+      gap: 18px;
+    }
+
+    .subpanel {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.7);
+      padding: 18px;
+    }
+
+    .subpanel h2 {
+      margin: 0 0 12px;
+      font-size: 1.08rem;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+
+    .subpanel-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .subpanel-head h2 {
+      margin: 0;
+    }
+
+    .subpanel-head .secondary {
+      padding: 7px 10px;
+      white-space: nowrap;
+    }
+
+    .settings-grid {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    @media (max-width: 640px) {
+      .settings-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .field {
+      display: grid;
+      gap: 6px;
+    }
+
+    .field label {
+      margin-right: 0;
+    }
+
+    .field select {
+      width: 100%;
+    }
+
+    .row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    label {
+      font-size: 0.92rem;
+      color: var(--muted);
+      margin-right: 6px;
+    }
+
+    input,
+    select,
+    button {
+      font: inherit;
+      border-radius: 10px;
+      border: 1px solid var(--line);
+      padding: 10px 12px;
+      color: var(--ink);
+      background: white;
+    }
+
+    input[type="text"] {
+      min-width: 170px;
+      text-transform: lowercase;
+    }
+
+    button {
+      cursor: pointer;
+      transition: transform 0.12s ease, box-shadow 0.12s ease;
+    }
+
+    button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 14px rgba(20, 99, 86, 0.2);
+    }
+
+    .primary {
+      border-color: transparent;
+      color: white;
+      background: linear-gradient(130deg, var(--accent), #0f4f45);
+    }
+
+    .secondary {
+      background: #fff;
+    }
+
+    .tiles {
+      display: grid;
+      grid-template-columns: repeat(var(--word-len), minmax(44px, 1fr));
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .tile {
+      height: 52px;
+      border-radius: 11px;
+      border: 2px solid var(--line);
+      display: grid;
+      place-items: center;
+      font-weight: 700;
+      font-size: 1.35rem;
+      letter-spacing: 0.02em;
+      user-select: none;
+      cursor: pointer;
+      transition: transform 0.12s ease, background-color 0.18s ease;
+      background: #f4f5f7;
+      color: #2a2f3c;
+    }
+
+    .tile:hover {
+      transform: translateY(-1px);
+    }
+
+    .tile.green {
+      background: #2e8f5a;
+      border-color: #2e8f5a;
+      color: #fff;
+    }
+
+    .tile.orange {
+      background: #ed8a25;
+      border-color: #ed8a25;
+      color: #fff;
+    }
+
+    .legend {
+      margin: 12px 0 0;
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.45;
+    }
+
+    .status {
+      margin-top: 12px;
+      min-height: 22px;
+      font-size: 0.93rem;
+      color: var(--muted);
+    }
+
+    .status.error {
+      color: #ab2230;
+    }
+
+    .status.good {
+      color: #135d47;
+    }
+
+    .results {
+      margin-top: 8px;
+      display: grid;
+      gap: 8px;
+    }
+
+    .result {
+      display: flex;
+      justify-content: space-between;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      padding: 9px 10px;
+      background: white;
+      animation: pop 0.2s ease;
+    }
+
+    @keyframes pop {
+      from {
+        opacity: 0;
+        transform: translateY(5px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .history {
+      margin: 8px 0 0;
+      display: grid;
+      gap: 8px;
+      max-height: 250px;
+      overflow: auto;
+      padding-right: 4px;
+    }
+
+    .history-item {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 8px 10px;
+      background: white;
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .chips {
+      display: flex;
+      gap: 4px;
+    }
+
+    .chip {
+      width: 14px;
+      height: 14px;
+      border-radius: 4px;
+      border: 1px solid rgba(0, 0, 0, 0.18);
+      background: #d2d7e2;
+    }
+
+    .chip.green {
+      background: #2e8f5a;
+    }
+
+    .chip.orange {
+      background: #ed8a25;
+    }
+
+    .mono {
+      font-family: "Consolas", "Courier New", monospace;
+    }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <header class="header">
+      <h1 id="pageTitle" class="title">Motus Solver Web</h1>
+    </header>
+
+    <section class="grid">
+      <article class="panel">
+        <div class="stack">
+          <section class="subpanel">
+            <div class="subpanel-head">
+              <h2 id="settingsTitle">Paramètres de partie</h2>
+              <button id="resetButton" class="secondary">Nouvelle partie</button>
+            </div>
+            <div class="settings-grid">
+              <div class="field">
+                <label id="languageLabel" for="languageSelect">Langue</label>
+                <select id="languageSelect">
+                  <option value="french" selected>Français</option>
+                  <option value="english">English</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label id="lengthLabel" for="wordLength">Longueur</label>
+                <select id="wordLength">
+                  <option value="5" selected>5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                </select>
+              </div>
+            </div>
+          </section>
+
+          <section class="subpanel">
+            <h2 id="panelGuess">Entrer un essai</h2>
+            <div class="row">
+              <label id="wordLabel" for="guessInput">Mot joué</label>
+              <input id="guessInput" type="text" maxlength="5" placeholder="ex: saine" autocomplete="off" />
+
+              <button id="applyButton" class="primary">Recherche</button>
+            </div>
+
+            <div id="tiles" class="tiles" style="--word-len: 5;"></div>
+
+            <p id="legendText" class="legend">
+              Clique sur chaque lettre pour changer son etat:<br />
+              1 clic = vert, 2 clics = orange, 3 clics = normal.
+            </p>
+
+            <div id="status" class="status"></div>
+          </section>
+        </div>
+      </article>
+
+      <article class="panel">
+        <h2 id="resultsTitle">Résultats</h2>
+        <div class="row">
+          <strong id="remainingLabel">Mots possibles:</strong>
+          <span id="remainingCount" class="mono">-</span>
+        </div>
+        <div id="results" class="results"></div>
+
+        <h2 id="historyTitle" style="margin-top: 16px;">Historique</h2>
+        <div id="history" class="history"></div>
+      </article>
+    </section>
+  </main>
+
+  <script>
+    const stateOrder = [0, 2, 1];
+    const stateClass = { 0: "", 1: "orange", 2: "green" };
+    const languageConfig = {
+      french: {
+        htmlLang: "fr",
+        prefix: "french",
+        languageLabel: "Langue",
+        title: "Motus Solver Web",
+        settingsTitle: "Paramètres de partie",
+        enterTry: "Entrer un essai",
+        lengthLabel: "Longueur",
+        wordLabel: "Mot joué",
+        search: "Recherche",
+        reset: "Nouvelle partie",
+        results: "Résultats",
+        remainingLabel: "Mots possibles:",
+        history: "Historique",
+        legend: "Clique sur chaque lettre pour changer son état:<br />1 clic = vert, 2 clics = orange, 3 clics = normal.",
+        placeholder: "ex: saine",
+        loading: (wordLength) => "Chargement du dictionnaire " + wordLength + " lettres...",
+        loaded: (count) => "Dictionnaire chargé: " + count + " mots.",
+        exactLength: (wordLength) => "Le mot doit contenir exactement " + wordLength + " lettres.",
+        noCandidates: "0 mot possible: vérifie ton feedback (couleurs).",
+        solved: (word) => "Trouvé: " + word + " !",
+        filtered: "Filtrage terminé. Prochaines suggestions calculées.",
+        resetDone: "Partie réinitialisée.",
+        ready: "Prêt. Entre un mot puis clique les cases pour le feedback.",
+        errorLoad: (details) =>
+          "Erreur de chargement. Publie ce dossier sur GitHub Pages ou utilise un serveur local HTTP. Détails: " + details,
+        suggestionNone: "Aucune suggestion."
+      },
+      english: {
+        htmlLang: "en",
+        prefix: "english",
+        languageLabel: "Language",
+        title: "Motus Solver Web",
+        settingsTitle: "Game settings",
+        enterTry: "Enter a guess",
+        lengthLabel: "Length",
+        wordLabel: "Guess word",
+        search: "Search",
+        reset: "New game",
+        results: "Results",
+        remainingLabel: "Possible words:",
+        history: "History",
+        legend: "Click each letter to change its state:<br />1 click = green, 2 clicks = orange, 3 clicks = normal.",
+        placeholder: "ex: share",
+        loading: (wordLength) => "Loading " + wordLength + "-letter dictionary...",
+        loaded: (count) => "Dictionary loaded: " + count + " words.",
+        exactLength: (wordLength) => "The word must contain exactly " + wordLength + " letters.",
+        noCandidates: "0 possible words: check your feedback (colors).",
+        solved: (word) => "Found: " + word + " !",
+        filtered: "Filtering complete. Next suggestions calculated.",
+        resetDone: "Game reset.",
+        ready: "Ready. Enter a word and click the tiles for feedback.",
+        errorLoad: (details) =>
+          "Loading error. Publish this folder on GitHub Pages or use a local HTTP server. Details: " + details,
+        suggestionNone: "No suggestions."
+      }
+    };
+
+    const els = {
+      pageTitle: document.getElementById("pageTitle"),
+      panelGuess: document.getElementById("panelGuess"),
+      settingsTitle: document.getElementById("settingsTitle"),
+      languageLabel: document.getElementById("languageLabel"),
+      languageSelect: document.getElementById("languageSelect"),
+      lengthLabel: document.getElementById("lengthLabel"),
+      wordLabel: document.getElementById("wordLabel"),
+      wordLength: document.getElementById("wordLength"),
+      guessInput: document.getElementById("guessInput"),
+      tiles: document.getElementById("tiles"),
+      applyButton: document.getElementById("applyButton"),
+      resetButton: document.getElementById("resetButton"),
+      status: document.getElementById("status"),
+      remainingCount: document.getElementById("remainingCount"),
+      results: document.getElementById("results"),
+      history: document.getElementById("history"),
+      resultsTitle: document.getElementById("resultsTitle"),
+      remainingLabel: document.getElementById("remainingLabel"),
+      historyTitle: document.getElementById("historyTitle"),
+      legendText: document.getElementById("legendText")
+    };
+
+    const appState = {
+      language: "french",
+      wordLength: 5,
+      dictionary: [],
+      candidates: [],
+      attempts: [],
+      dictionaryKey: ""
+    };
+
+    let topExamplesCache = null;
+    let topExamplesPromise = null;
+
+    function sanitizeWord(raw) {
+      return (raw || "")
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[^a-z]/g, "");
+    }
+
+    function patternToKey(pattern) {
+      return pattern.join("");
+    }
+
+    function log2(x) {
+      return Math.log(x) / Math.log(2);
+    }
+
+    function setStatus(message, type = "") {
+      els.status.textContent = message;
+      els.status.className = "status" + (type ? " " + type : "");
+    }
+
+    function getText() {
+      return languageConfig[appState.language];
+    }
+
+    function applyLanguageText() {
+      const text = getText();
+      document.documentElement.lang = text.htmlLang;
+      els.pageTitle.textContent = text.title;
+      els.settingsTitle.textContent = text.settingsTitle;
+      els.panelGuess.textContent = text.enterTry;
+      els.languageLabel.textContent = text.languageLabel;
+      els.lengthLabel.textContent = text.lengthLabel;
+      els.wordLabel.textContent = text.wordLabel;
+      els.applyButton.textContent = text.search;
+      els.resetButton.textContent = text.reset;
+      els.resultsTitle.textContent = text.results;
+      els.remainingLabel.textContent = text.remainingLabel;
+      els.historyTitle.textContent = text.history;
+      els.legendText.innerHTML = text.legend;
+      els.guessInput.placeholder = text.placeholder;
+    }
+
+    function createTiles() {
+      const guess = sanitizeWord(els.guessInput.value).slice(0, appState.wordLength);
+      els.guessInput.value = guess;
+      els.tiles.style.setProperty("--word-len", String(appState.wordLength));
+      els.tiles.innerHTML = "";
+
+      for (let i = 0; i < appState.wordLength; i += 1) {
+        const letter = guess[i] ? guess[i].toUpperCase() : "_";
+        const tile = document.createElement("button");
+        tile.type = "button";
+        tile.className = "tile";
+        tile.dataset.state = "0";
+        tile.dataset.index = String(i);
+        tile.textContent = letter;
+        tile.addEventListener("click", () => {
+          const current = Number(tile.dataset.state);
+          const next = stateOrder[(stateOrder.indexOf(current) + 1) % stateOrder.length];
+          tile.dataset.state = String(next);
+          tile.className = "tile " + stateClass[next];
+        });
+        els.tiles.appendChild(tile);
+      }
+    }
+
+    function collectPattern() {
+      const tiles = [...els.tiles.querySelectorAll(".tile")];
+      return tiles.map((tile) => Number(tile.dataset.state));
+    }
+
+    function renderHistory() {
+      els.history.innerHTML = "";
+      appState.attempts.forEach((attempt, index) => {
+        const row = document.createElement("div");
+        row.className = "history-item";
+
+        const left = document.createElement("strong");
+        left.textContent = attempt.word;
+
+        const content = document.createElement("div");
+        content.style.display = "flex";
+        content.style.alignItems = "center";
+        content.style.gap = "10px";
+        content.appendChild(left);
+
+        const chips = document.createElement("div");
+        chips.className = "chips";
+        for (const v of attempt.pattern) {
+          const chip = document.createElement("span");
+          chip.className = "chip " + (v === 2 ? "green" : v === 1 ? "orange" : "");
+          chips.appendChild(chip);
+        }
+
+        content.appendChild(chips);
+        row.appendChild(content);
+
+        if (index === appState.attempts.length - 1) {
+          const removeButton = document.createElement("button");
+          removeButton.type = "button";
+          removeButton.textContent = "×";
+          removeButton.title = "Remove last guess";
+          removeButton.setAttribute("aria-label", "Remove last guess");
+          removeButton.style.border = "none";
+          removeButton.style.background = "transparent";
+          removeButton.style.color = "var(--muted)";
+          removeButton.style.fontSize = "1.25rem";
+          removeButton.style.lineHeight = "1";
+          removeButton.style.padding = "0 4px";
+          removeButton.style.boxShadow = "none";
+          removeButton.addEventListener("click", () => {
+            undoLastAttempt().catch((error) => setStatus(error.message, "error"));
+          });
+          row.appendChild(removeButton);
+        }
+
+        els.history.appendChild(row);
+      });
+    }
+
+    function recomputeCandidatesFromAttempts() {
+      let nextCandidates = [...appState.dictionary];
+      for (const attempt of appState.attempts) {
+        nextCandidates = applyAttemptFilter(nextCandidates, attempt);
+      }
+      appState.candidates = nextCandidates;
+    }
+
+    async function refreshSuggestions() {
+      if (appState.attempts.length === 0) {
+        await renderOpeningSuggestion();
+        return;
+      }
+
+      const suggestions = await topEntropySuggestions(appState.candidates, 8);
+      renderResults(suggestions);
+    }
+
+    async function undoLastAttempt() {
+      if (!appState.attempts.length) {
+        return;
+      }
+
+      appState.attempts.pop();
+      recomputeCandidatesFromAttempts();
+
+      renderHistory();
+      els.remainingCount.textContent = String(appState.candidates.length);
+      await refreshSuggestions();
+
+      if (appState.attempts.length === 0) {
+        setStatus(getText().ready, "good");
+      } else {
+        setStatus(getText().filtered, "good");
+      }
+    }
+
+    function renderResults(suggestions) {
+      els.results.innerHTML = "";
+      if (!suggestions.length) {
+        const empty = document.createElement("div");
+        empty.textContent = getText().suggestionNone;
+        empty.className = "status";
+        els.results.appendChild(empty);
+        return;
+      }
+
+      for (const { word, score } of suggestions) {
+        const line = document.createElement("button");
+        line.className = "result";
+        line.type = "button";
+        line.style.width = "100%";
+        line.style.textAlign = "left";
+        line.style.cursor = "pointer";
+        const left = document.createElement("strong");
+        left.textContent = word;
+        const right = document.createElement("span");
+        right.className = "mono";
+        right.textContent = score.toFixed(3) + " bits";
+        line.appendChild(left);
+        line.appendChild(right);
+        line.addEventListener("click", () => {
+          els.guessInput.value = word;
+          createTiles();
+          els.guessInput.focus();
+        });
+        els.results.appendChild(line);
+      }
+    }
+
+    async function loadTopExamples() {
+      if (topExamplesCache) {
+        return topExamplesCache;
+      }
+
+      if (!topExamplesPromise) {
+        topExamplesPromise = (async () => {
+          const paths = ["./data/top_examples.json", "./data/top_examples_5.json"];
+
+          for (const path of paths) {
+            const response = await fetch(path);
+            if (!response.ok) {
+              continue;
+            }
+
+            return await response.json();
+          }
+
+          return {};
+        })().then((cache) => {
+          topExamplesCache = cache;
+          return cache;
+        });
+      }
+
+      return topExamplesPromise;
+    }
+
+    async function renderOpeningSuggestion() {
+      if (appState.attempts.length > 0) {
+        return;
+      }
+
+      const cache = await loadTopExamples();
+      const entry = cache[appState.dictionaryKey];
+
+      if (!entry || !entry.top_word) {
+        renderResults([]);
+        return;
+      }
+
+      const suggestions = Array.isArray(entry.top_words)
+        ? entry.top_words.slice(0, 8).map((item) => ({
+            word: item.word,
+            score: typeof item.bits === "number" ? item.bits : 0
+          }))
+        : [
+            {
+              word: entry.top_word,
+              score: typeof entry.top_word_bits === "number" ? entry.top_word_bits : 0
+            }
+          ];
+
+      renderResults(suggestions);
+    }
+
+    function feedbackFor(guess, answer) {
+      const n = guess.length;
+      const result = new Array(n).fill(0);
+      const remaining = {};
+
+      for (let i = 0; i < n; i += 1) {
+        if (guess[i] === answer[i]) {
+          result[i] = 2;
+        } else {
+          const ch = answer[i];
+          remaining[ch] = (remaining[ch] || 0) + 1;
+        }
+      }
+
+      for (let i = 0; i < n; i += 1) {
+        if (result[i] !== 0) {
+          continue;
+        }
+        const ch = guess[i];
+        if ((remaining[ch] || 0) > 0) {
+          result[i] = 1;
+          remaining[ch] -= 1;
+        }
+      }
+
+      return result;
+    }
+
+    function applyAttemptFilter(currentCandidates, attempt) {
+      const targetKey = patternToKey(attempt.pattern);
+      return currentCandidates.filter((answer) => patternToKey(feedbackFor(attempt.word, answer)) === targetKey);
+    }
+
+    function buildGuessPool(candidates) {
+      if (candidates.length <= 450) {
+        return candidates;
+      }
+
+      const len = appState.wordLength;
+      const posFreq = Array.from({ length: len }, () => Object.create(null));
+      const globalFreq = Object.create(null);
+
+      for (const w of candidates) {
+        for (let i = 0; i < len; i += 1) {
+          const c = w[i];
+          posFreq[i][c] = (posFreq[i][c] || 0) + 1;
+          globalFreq[c] = (globalFreq[c] || 0) + 1;
+        }
+      }
+
+      const scored = candidates.map((w) => {
+        let s = 0;
+        const seen = new Set();
+        for (let i = 0; i < len; i += 1) {
+          const c = w[i];
+          s += (posFreq[i][c] || 0) * 1.4;
+          if (!seen.has(c)) {
+            seen.add(c);
+            s += globalFreq[c] || 0;
+          }
+        }
+        return { word: w, score: s };
+      });
+
+      scored.sort((a, b) => b.score - a.score);
+      const limit = Math.min(candidates.length, candidates.length > 2500 ? 230 : 320);
+      return scored.slice(0, limit).map((x) => x.word);
+    }
+
+    async function topEntropySuggestions(candidates, limit = 8) {
+      if (!candidates.length) {
+        return [];
+      }
+
+      const guessPool = buildGuessPool(candidates);
+      const total = candidates.length;
+      const out = [];
+
+      for (let i = 0; i < guessPool.length; i += 1) {
+        if (i % 20 === 0) {
+          setStatus("Calcul en cours: " + i + "/" + guessPool.length + "...", "");
+          await new Promise((resolve) => requestAnimationFrame(resolve));
+        }
+
+        const guess = guessPool[i];
+        const buckets = Object.create(null);
+
+        for (const ans of candidates) {
+          const key = patternToKey(feedbackFor(guess, ans));
+          buckets[key] = (buckets[key] || 0) + 1;
+        }
+
+        let entropy = 0;
+        for (const count of Object.values(buckets)) {
+          const p = count / total;
+          entropy -= p * log2(p);
+        }
+
+        out.push({ word: guess, score: entropy });
+      }
+
+      out.sort((a, b) => b.score - a.score);
+      return out.slice(0, limit);
+    }
+
+    async function loadDictionary(wordLength) {
+      const langText = getText();
+      setStatus(langText.loading(wordLength), "");
+      const path = "./data/" + langText.prefix + "_" + wordLength + ".txt";
+      const response = await fetch(path);
+      if (!response.ok) {
+        throw new Error("Impossible de lire " + path + " (HTTP " + response.status + ")");
+      }
+      const fileText = await response.text();
+      const words = fileText
+        .split(/\r?\n/)
+        .map((line) => sanitizeWord(line.trim()))
+        .filter((w) => w.length === wordLength);
+
+      if (!words.length) {
+        throw new Error("Aucun mot valide trouve dans " + path);
+      }
+
+      appState.wordLength = wordLength;
+      appState.dictionaryKey = langText.prefix + "_" + wordLength + ".txt";
+      appState.dictionary = [...new Set(words)];
+      appState.candidates = [...appState.dictionary];
+      appState.attempts = [];
+
+      els.guessInput.maxLength = wordLength;
+      els.guessInput.value = "";
+      createTiles();
+      renderHistory();
+      els.remainingCount.textContent = String(appState.candidates.length);
+      setStatus(langText.loaded(appState.dictionary.length), "good");
+
+      await renderOpeningSuggestion();
+    }
+
+    async function handleRecherche() {
+      const guess = sanitizeWord(els.guessInput.value);
+      if (guess.length !== appState.wordLength) {
+        setStatus(getText().exactLength(appState.wordLength), "error");
+        return;
+      }
+
+      const pattern = collectPattern();
+      const attempt = { word: guess, pattern };
+      appState.attempts.push(attempt);
+      appState.candidates = applyAttemptFilter(appState.candidates, attempt);
+
+      renderHistory();
+      els.remainingCount.textContent = String(appState.candidates.length);
+
+      if (appState.candidates.length === 0) {
+        renderResults([]);
+        setStatus(getText().noCandidates, "error");
+        return;
+      }
+
+      await refreshSuggestions();
+
+      if (appState.candidates.length === 1) {
+        setStatus(getText().solved(appState.candidates[0]), "good");
+      } else {
+        setStatus(getText().filtered, "good");
+      }
+
+      els.guessInput.value = "";
+      createTiles();
+      els.guessInput.focus();
+    }
+
+    async function resetGame() {
+      appState.candidates = [...appState.dictionary];
+      appState.attempts = [];
+      els.guessInput.value = "";
+      createTiles();
+      renderHistory();
+      els.remainingCount.textContent = String(appState.candidates.length);
+      setStatus(getText().resetDone, "good");
+
+      await renderOpeningSuggestion();
+    }
+
+    els.guessInput.addEventListener("input", () => {
+      createTiles();
+    });
+
+    els.wordLength.addEventListener("change", async () => {
+      const newLen = Number(els.wordLength.value);
+      try {
+        await loadDictionary(newLen);
+      } catch (error) {
+        setStatus(error.message, "error");
+      }
+    });
+
+    els.languageSelect.addEventListener("change", async () => {
+      appState.language = els.languageSelect.value;
+      applyLanguageText();
+      try {
+        await loadDictionary(Number(els.wordLength.value));
+        setStatus(getText().ready, "good");
+      } catch (error) {
+        setStatus(getText().errorLoad(error.message), "error");
+      }
+    });
+
+    els.applyButton.addEventListener("click", () => {
+      handleRecherche().catch((error) => {
+        setStatus(error.message, "error");
+      });
+    });
+
+    els.resetButton.addEventListener("click", () => {
+      resetGame().catch((error) => {
+        setStatus(error.message, "error");
+      });
+    });
+
+    window.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        handleRecherche().catch((error) => setStatus(error.message, "error"));
+      }
+    });
+
+    (async function init() {
+      try {
+        applyLanguageText();
+        await loadDictionary(5);
+        setStatus(getText().ready, "good");
+      } catch (error) {
+        setStatus(getText().errorLoad(error.message), "error");
+      }
+    })();
+  </script>
+</body>
+</html>

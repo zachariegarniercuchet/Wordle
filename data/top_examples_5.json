@@ -1,0 +1,98 @@
+{
+  "english_5.txt": {
+    "top_word": "reals",
+    "top_words": [
+      {
+        "word": "reals",
+        "bits": 7.720527021004296
+      },
+      {
+        "word": "lears",
+        "bits": 7.719408978005027
+      },
+      {
+        "word": "aloes",
+        "bits": 7.710972099256003
+      },
+      {
+        "word": "lares",
+        "bits": 7.702554541891679
+      },
+      {
+        "word": "arise",
+        "bits": 7.685594225858345
+      },
+      {
+        "word": "sorel",
+        "bits": 7.674322672130577
+      },
+      {
+        "word": "roles",
+        "bits": 7.673512729721157
+      },
+      {
+        "word": "lores",
+        "bits": 7.618729448808801
+      },
+      {
+        "word": "aries",
+        "bits": 7.551979553347774
+      },
+      {
+        "word": "seral",
+        "bits": 7.519797663927329
+      }
+    ],
+    "top_word_bits": 7.720527021004296,
+    "expected_information": 7.720527021004296,
+    "word_count": 15921
+  },
+  "french_5.txt": {
+    "top_word": "taris",
+    "top_words": [
+      {
+        "word": "taris",
+        "bits": 6.821369312816285
+      },
+      {
+        "word": "tares",
+        "bits": 6.814865960736395
+      },
+      {
+        "word": "tarie",
+        "bits": 6.770351929459821
+      },
+      {
+        "word": "tores",
+        "bits": 6.607896384185809
+      },
+      {
+        "word": "sorte",
+        "bits": 6.563980770218467
+      },
+      {
+        "word": "taire",
+        "bits": 6.434291625084297
+      },
+      {
+        "word": "rites",
+        "bits": 6.405199773655881
+      },
+      {
+        "word": "taies",
+        "bits": 6.3484105205405905
+      },
+      {
+        "word": "tires",
+        "bits": 6.324183675780587
+      },
+      {
+        "word": "aires",
+        "bits": 6.3088648154364195
+      }
+    ],
+    "top_word_bits": 6.821369312816285,
+    "expected_information": 6.821369312816285,
+    "word_count": 3950
+  }
+}

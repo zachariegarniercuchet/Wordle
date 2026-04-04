@@ -81,26 +81,12 @@
       display: grid;
       gap: 18px;
       padding: 22px;
-      grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
-      grid-template-areas: "results settings";
+      grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
     }
 
-    .grid > .panel:first-of-type {
-      grid-area: settings;
-    }
-
-    .grid > .panel:last-of-type {
-      grid-area: results;
-    }
-
-    @media (max-width: 760px) {
+    @media (max-width: 720px) {
       .grid {
         grid-template-columns: 1fr;
-        grid-template-areas: none;
-      }
-
-      .grid > .panel {
-        grid-area: auto;
       }
     }
 

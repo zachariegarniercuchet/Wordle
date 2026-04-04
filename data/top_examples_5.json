@@ -1,50 +1,50 @@
 {
-  "french_7.txt": {
-    "top_word": "satiner",
+  "french_8.txt": {
+    "top_word": "routines",
     "top_words": [
       {
-        "word": "satiner",
-        "bits": 48.04382396316483
+        "word": "routines",
+        "bits": 99.1467625228925
       },
       {
-        "word": "soutier",
-        "bits": 46.29525908376784
+        "word": "latrines",
+        "bits": 95.25776934362557
       },
       {
-        "word": "traines",
-        "bits": 46.10677493937315
+        "word": "notaries",
+        "bits": 94.96488291892342
       },
       {
-        "word": "taniser",
-        "bits": 46.04109741600547
+        "word": "saulnier",
+        "bits": 90.99566462735383
       },
       {
-        "word": "routine",
-        "bits": 45.84803234221063
+        "word": "ralentis",
+        "bits": 90.64375719453267
       },
       {
-        "word": "rations",
-        "bits": 45.70481400794883
+        "word": "notaires",
+        "bits": 90.5728159421979
       },
       {
-        "word": "taurine",
-        "bits": 45.44068742809574
+        "word": "tauliers",
+        "bits": 90.27749447429618
       },
       {
-        "word": "rustine",
-        "bits": 44.884176420334065
+        "word": "soutenir",
+        "bits": 88.94855137333379
       },
       {
-        "word": "riantes",
-        "bits": 44.6674697796397
+        "word": "roulants",
+        "bits": 88.77738692989635
       },
       {
-        "word": "saunier",
-        "bits": 44.64146544817096
+        "word": "lunaires",
+        "bits": 87.15702026936737
       }
     ],
-    "top_word_bits": 48.04382396316483,
-    "expected_information": 48.04382396316483,
-    "word_count": 9732
+    "top_word_bits": 99.1467625228925,
+    "expected_information": 99.1467625228925,
+    "word_count": 11169
   }
 }

@@ -223,5 +223,5 @@ def precompute_top_examples_incremental(
 
 
 if __name__ == "__main__":
-    cache = precompute_top_examples_incremental(prefixes=("french",), lengths=(8,), tolerance=50.0)
+    cache = precompute_top_examples_incremental(prefixes=("french",), lengths=(9,), tolerance=50.0)
     #print(f"top_examples_5.json: {len(cache)} vocabulary lists cached")

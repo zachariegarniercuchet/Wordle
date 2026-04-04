@@ -1,0 +1,48 @@
+{
+  "top_word": "routines",
+  "top_words": [
+    {
+      "word": "routines",
+      "bits": 99.1467625228925
+    },
+    {
+      "word": "latrines",
+      "bits": 95.25776934362557
+    },
+    {
+      "word": "notaries",
+      "bits": 94.96488291892342
+    },
+    {
+      "word": "saulnier",
+      "bits": 90.99566462735383
+    },
+    {
+      "word": "ralentis",
+      "bits": 90.64375719453267
+    },
+    {
+      "word": "notaires",
+      "bits": 90.5728159421979
+    },
+    {
+      "word": "tauliers",
+      "bits": 90.27749447429618
+    },
+    {
+      "word": "soutenir",
+      "bits": 88.94855137333379
+    },
+    {
+      "word": "roulants",
+      "bits": 88.77738692989635
+    },
+    {
+      "word": "lunaires",
+      "bits": 87.15702026936737
+    }
+  ],
+  "top_word_bits": 99.1467625228925,
+  "expected_information": 99.1467625228925,
+  "word_count": 11169
+}

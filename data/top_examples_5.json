@@ -1,50 +1,50 @@
 {
-  "english_6.txt": {
-    "top_word": "serian",
+  "french_6.txt": {
+    "top_word": "taries",
     "top_words": [
       {
-        "word": "serian",
-        "bits": 25.420266874432652
+        "word": "taries",
+        "bits": 20.66289245594623
       },
       {
-        "word": "saline",
-        "bits": 25.144886258528697
+        "word": "tories",
+        "bits": 19.31720762633641
       },
       {
-        "word": "serial",
-        "bits": 24.678789740572284
+        "word": "routes",
+        "bits": 19.023425740915755
       },
       {
-        "word": "alines",
-        "bits": 24.42749511592294
+        "word": "tiares",
+        "bits": 18.84163297165241
       },
       {
-        "word": "silane",
-        "bits": 24.42631013362238
+        "word": "satire",
+        "bits": 18.792663029644046
       },
       {
-        "word": "lineas",
-        "bits": 24.39929303106974
+        "word": "autres",
+        "bits": 18.734144251600274
       },
       {
-        "word": "selina",
-        "bits": 24.286274338976913
+        "word": "aitres",
+        "bits": 18.677770202551777
       },
       {
-        "word": "rosine",
-        "bits": 24.106110183839366
+        "word": "sauret",
+        "bits": 18.674581694061192
       },
       {
-        "word": "lianes",
-        "bits": 24.086650706795524
+        "word": "sorite",
+        "bits": 18.619259764491993
       },
       {
-        "word": "selion",
-        "bits": 24.060190610274308
+        "word": "sortie",
+        "bits": 18.609210352970056
       }
     ],
-    "top_word_bits": 25.420266874432652,
-    "expected_information": 25.420266874432652,
-    "word_count": 29874
+    "top_word_bits": 20.66289245594623,
+    "expected_information": 20.66289245594623,
+    "word_count": 6922
   }
 }

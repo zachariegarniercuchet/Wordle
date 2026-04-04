@@ -1,0 +1,48 @@
+{
+  "top_word": "taries",
+  "top_words": [
+    {
+      "word": "taries",
+      "bits": 20.66289245594623
+    },
+    {
+      "word": "tories",
+      "bits": 19.31720762633641
+    },
+    {
+      "word": "routes",
+      "bits": 19.023425740915755
+    },
+    {
+      "word": "tiares",
+      "bits": 18.84163297165241
+    },
+    {
+      "word": "satire",
+      "bits": 18.792663029644046
+    },
+    {
+      "word": "autres",
+      "bits": 18.734144251600274
+    },
+    {
+      "word": "aitres",
+      "bits": 18.677770202551777
+    },
+    {
+      "word": "sauret",
+      "bits": 18.674581694061192
+    },
+    {
+      "word": "sorite",
+      "bits": 18.619259764491993
+    },
+    {
+      "word": "sortie",
+      "bits": 18.609210352970056
+    }
+  ],
+  "top_word_bits": 20.66289245594623,
+  "expected_information": 20.66289245594623,
+  "word_count": 6922
+}

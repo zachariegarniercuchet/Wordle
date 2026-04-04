@@ -81,12 +81,26 @@
       display: grid;
       gap: 18px;
       padding: 22px;
-      grid-template-columns: 1.1fr 0.9fr;
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+      grid-template-areas: "results settings";
     }
 
-    @media (max-width: 900px) {
+    .grid > .panel:first-of-type {
+      grid-area: settings;
+    }
+
+    .grid > .panel:last-of-type {
+      grid-area: results;
+    }
+
+    @media (max-width: 760px) {
       .grid {
         grid-template-columns: 1fr;
+        grid-template-areas: none;
+      }
+
+      .grid > .panel {
+        grid-area: auto;
       }
     }
 
@@ -732,18 +746,47 @@
 
       if (!topExamplesPromise) {
         topExamplesPromise = (async () => {
-          const paths = ["./data/top_examples.json", "./data/top_examples_5.json"];
+          const cache = {};
+          const lengths = [5, 6, 7, 8, 9];
+          const prefixes = [...new Set(Object.values(languageConfig).map((cfg) => cfg.prefix))];
 
-          for (const path of paths) {
-            const response = await fetch(path);
-            if (!response.ok) {
-              continue;
+          // Prefer per-dictionary files from data/top_examples when available.
+          const itemPaths = [];
+          for (const prefix of prefixes) {
+            for (const length of lengths) {
+              itemPaths.push(`./data/top_examples/${prefix}_${length}.json`);
             }
-
-            return await response.json();
           }
 
-          return {};
+          const itemResponses = await Promise.all(
+            itemPaths.map((path) => fetch(path).then((response) => ({ path, response })).catch(() => null))
+          );
+
+          for (const item of itemResponses) {
+            if (!item || !item.response || !item.response.ok) {
+              continue;
+            }
+            const data = await item.response.json();
+            const filename = item.path.split("/").pop();
+            if (!filename) {
+              continue;
+            }
+            const key = filename.replace(".json", ".txt");
+            cache[key] = data;
+          }
+
+          // Fallback to aggregate cache files for entries not present above.
+          const legacyPaths = ["./data/top_examples.json", "./data/top_examples_5.json"];
+          for (const path of legacyPaths) {
+            const response = await fetch(path).catch(() => null);
+            if (!response || !response.ok) {
+              continue;
+            }
+            const legacyCache = await response.json();
+            Object.assign(cache, legacyCache, cache);
+          }
+
+          return cache;
         })().then((cache) => {
           topExamplesCache = cache;
           return cache;

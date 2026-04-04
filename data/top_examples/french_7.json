@@ -1,0 +1,48 @@
+{
+  "top_word": "satiner",
+  "top_words": [
+    {
+      "word": "satiner",
+      "bits": 48.04382396316483
+    },
+    {
+      "word": "soutier",
+      "bits": 46.29525908376784
+    },
+    {
+      "word": "traines",
+      "bits": 46.10677493937315
+    },
+    {
+      "word": "taniser",
+      "bits": 46.04109741600547
+    },
+    {
+      "word": "routine",
+      "bits": 45.84803234221063
+    },
+    {
+      "word": "rations",
+      "bits": 45.70481400794883
+    },
+    {
+      "word": "taurine",
+      "bits": 45.44068742809574
+    },
+    {
+      "word": "rustine",
+      "bits": 44.884176420334065
+    },
+    {
+      "word": "riantes",
+      "bits": 44.6674697796397
+    },
+    {
+      "word": "saunier",
+      "bits": 44.64146544817096
+    }
+  ],
+  "top_word_bits": 48.04382396316483,
+  "expected_information": 48.04382396316483,
+  "word_count": 9732
+}

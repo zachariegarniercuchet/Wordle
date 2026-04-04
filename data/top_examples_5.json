@@ -1,50 +1,50 @@
 {
-  "french_6.txt": {
-    "top_word": "taries",
+  "french_7.txt": {
+    "top_word": "satiner",
     "top_words": [
       {
-        "word": "taries",
-        "bits": 20.66289245594623
+        "word": "satiner",
+        "bits": 48.04382396316483
       },
       {
-        "word": "tories",
-        "bits": 19.31720762633641
+        "word": "soutier",
+        "bits": 46.29525908376784
       },
       {
-        "word": "routes",
-        "bits": 19.023425740915755
+        "word": "traines",
+        "bits": 46.10677493937315
       },
       {
-        "word": "tiares",
-        "bits": 18.84163297165241
+        "word": "taniser",
+        "bits": 46.04109741600547
       },
       {
-        "word": "satire",
-        "bits": 18.792663029644046
+        "word": "routine",
+        "bits": 45.84803234221063
       },
       {
-        "word": "autres",
-        "bits": 18.734144251600274
+        "word": "rations",
+        "bits": 45.70481400794883
       },
       {
-        "word": "aitres",
-        "bits": 18.677770202551777
+        "word": "taurine",
+        "bits": 45.44068742809574
       },
       {
-        "word": "sauret",
-        "bits": 18.674581694061192
+        "word": "rustine",
+        "bits": 44.884176420334065
       },
       {
-        "word": "sorite",
-        "bits": 18.619259764491993
+        "word": "riantes",
+        "bits": 44.6674697796397
       },
       {
-        "word": "sortie",
-        "bits": 18.609210352970056
+        "word": "saunier",
+        "bits": 44.64146544817096
       }
     ],
-    "top_word_bits": 20.66289245594623,
-    "expected_information": 20.66289245594623,
-    "word_count": 6922
+    "top_word_bits": 48.04382396316483,
+    "expected_information": 48.04382396316483,
+    "word_count": 9732
   }
 }

@@ -1,50 +1,50 @@
 {
-  "french_8.txt": {
-    "top_word": "routines",
+  "english_8.txt": {
+    "top_word": "ceratins",
     "top_words": [
       {
-        "word": "routines",
-        "bits": 99.1467625228925
+        "word": "ceratins",
+        "bits": 200.56545000414133
       },
       {
-        "word": "latrines",
-        "bits": 95.25776934362557
+        "word": "carotins",
+        "bits": 190.52841520949676
       },
       {
-        "word": "notaries",
-        "bits": 94.96488291892342
+        "word": "carlines",
+        "bits": 189.73080591541702
       },
       {
-        "word": "saulnier",
-        "bits": 90.99566462735383
+        "word": "creatins",
+        "bits": 188.65125789915405
       },
       {
-        "word": "ralentis",
-        "bits": 90.64375719453267
+        "word": "caroline",
+        "bits": 187.04663838620982
       },
       {
-        "word": "notaires",
-        "bits": 90.5728159421979
+        "word": "carioles",
+        "bits": 185.7538975138148
       },
       {
-        "word": "tauliers",
-        "bits": 90.27749447429618
+        "word": "calories",
+        "bits": 185.07136482752534
       },
       {
-        "word": "soutenir",
-        "bits": 88.94855137333379
+        "word": "cortinae",
+        "bits": 182.5828264751244
       },
       {
-        "word": "roulants",
-        "bits": 88.77738692989635
+        "word": "serotina",
+        "bits": 181.47505517264943
       },
       {
-        "word": "lunaires",
-        "bits": 87.15702026936737
+        "word": "cantoris",
+        "bits": 180.670877666938
       }
     ],
-    "top_word_bits": 99.1467625228925,
-    "expected_information": 99.1467625228925,
-    "word_count": 11169
+    "top_word_bits": 200.56545000414133,
+    "expected_information": 200.56545000414133,
+    "word_count": 51627
   }
 }

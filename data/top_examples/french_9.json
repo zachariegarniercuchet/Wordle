@@ -1,0 +1,48 @@
+{
+  "top_word": "carolines",
+  "top_words": [
+    {
+      "word": "carolines",
+      "bits": 180.1518267251289
+    },
+    {
+      "word": "courtines",
+      "bits": 167.84190038847345
+    },
+    {
+      "word": "canotiers",
+      "bits": 167.09035035200122
+    },
+    {
+      "word": "courantes",
+      "bits": 162.00457458360034
+    },
+    {
+      "word": "countries",
+      "bits": 161.4515606377876
+    },
+    {
+      "word": "croulants",
+      "bits": 153.92584745264654
+    },
+    {
+      "word": "canoteurs",
+      "bits": 153.65951700373586
+    },
+    {
+      "word": "souriante",
+      "bits": 153.493458952434
+    },
+    {
+      "word": "roulantes",
+      "bits": 153.10240384230454
+    },
+    {
+      "word": "relations",
+      "bits": 150.9365621186232
+    }
+  ],
+  "top_word_bits": 180.1518267251289,
+  "expected_information": 180.1518267251289,
+  "word_count": 10844
+}

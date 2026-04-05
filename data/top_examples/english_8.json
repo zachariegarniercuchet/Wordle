@@ -1,0 +1,48 @@
+{
+  "top_word": "ceratins",
+  "top_words": [
+    {
+      "word": "ceratins",
+      "bits": 200.56545000414133
+    },
+    {
+      "word": "carotins",
+      "bits": 190.52841520949676
+    },
+    {
+      "word": "carlines",
+      "bits": 189.73080591541702
+    },
+    {
+      "word": "creatins",
+      "bits": 188.65125789915405
+    },
+    {
+      "word": "caroline",
+      "bits": 187.04663838620982
+    },
+    {
+      "word": "carioles",
+      "bits": 185.7538975138148
+    },
+    {
+      "word": "calories",
+      "bits": 185.07136482752534
+    },
+    {
+      "word": "cortinae",
+      "bits": 182.5828264751244
+    },
+    {
+      "word": "serotina",
+      "bits": 181.47505517264943
+    },
+    {
+      "word": "cantoris",
+      "bits": 180.670877666938
+    }
+  ],
+  "top_word_bits": 200.56545000414133,
+  "expected_information": 200.56545000414133,
+  "word_count": 51627
+}

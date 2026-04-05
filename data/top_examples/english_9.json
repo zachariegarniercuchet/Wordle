@@ -1,0 +1,48 @@
+{
+  "top_word": "sarcoline",
+  "top_words": [
+    {
+      "word": "sarcoline",
+      "bits": 419.95231207046993
+    },
+    {
+      "word": "sarcolite",
+      "bits": 413.74598117434255
+    },
+    {
+      "word": "carolines",
+      "bits": 408.9013689234317
+    },
+    {
+      "word": "crotaline",
+      "bits": 404.91989695524666
+    },
+    {
+      "word": "contrails",
+      "bits": 392.5205581119264
+    },
+    {
+      "word": "creations",
+      "bits": 384.5333350612009
+    },
+    {
+      "word": "countries",
+      "bits": 384.00541690683866
+    },
+    {
+      "word": "coastline",
+      "bits": 382.17297217961794
+    },
+    {
+      "word": "courantes",
+      "bits": 380.9441785782728
+    },
+    {
+      "word": "narcotise",
+      "bits": 376.1641087160452
+    }
+  ],
+  "top_word_bits": 419.95231207046993,
+  "expected_information": 419.95231207046993,
+  "word_count": 53402
+}

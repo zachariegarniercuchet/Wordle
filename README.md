@@ -89,6 +89,18 @@ while len(solver.li_poss_mot) > 1:
     # ... get feedback from game ...
 ```
 
+### Web App Demo
+
+An `index.html` web app is included in this repository so you can test the solver in a browser.
+
+You can play the game directly in French or English:
+- French: https://wordly.org/fr
+- English: https://wordly.org/
+
+To test the solver with the bundled web app, open:
+
+https://zachariegarniercuchet.github.io/Wordle/
+
 ## Game Variants Supported
 
 ### Wordle (Classic)
